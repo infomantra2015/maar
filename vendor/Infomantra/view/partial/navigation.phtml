@@ -1,0 +1,16 @@
+<ul class="nav navbar-nav">
+    <?php if ($this->isLoggedIn) { ?>
+        <li><a href="<?php echo $this->url('user/default',
+            array('controller' => 'account')) ?>"><?php echo $this->translate('Manage Account') ?></a></li>
+        <li><a href="<?php echo $this->url('user/default',
+            array('controller' => 'change-password')) ?>"><?php echo $this->translate('Change Password') ?></a></li>
+        <li class="active"><a href="<?php echo $this->url('user/default',
+            array('controller' => 'login', 'action' => 'logout')) ?>"><?php echo $this->translate('Logout') ?></a></li>
+
+    <?php } else { ?>
+        <li class="active"><a href="<?php echo $this->url('user/default',
+                array('controller' => 'login')) ?>"><?php echo $this->translate('Login') ?></a></li>
+        <li><a href="<?php echo $this->url('user/default',
+                array('controller' => 'register')) ?>"><?php echo $this->translate('Registration') ?></a></li>    
+<?php } ?>
+</ul>

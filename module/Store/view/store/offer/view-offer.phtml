@@ -1,0 +1,38 @@
+<?php
+$offerDetails = $this->offerDetails;
+?>
+<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td><?php echo $offerDetails['title']; ?></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td><?php echo $offerDetails['description']; ?></td>
+            </tr>
+            <tr>
+                <th>Valid From</th>
+                <td><?php echo $offerDetails['valid_from']; ?></td>
+            </tr>
+            <tr>
+                <th>Valid To</th>
+                <td><?php echo $offerDetails['valid_to']; ?></td>
+            </tr>
+            <tr>
+                <th>Created On</th>
+                <td><?php echo $offerDetails['created_on']; ?></td>
+            </tr>
+            <tr>
+                <th>Modified On</th>
+                <td><?php echo $offerDetails['modified_on']; ?></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td><?php echo $offerDetails['status']; ?></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,65 @@
+<?php
+$storeList = $this->storeList;
+?>
+<input type="hidden" value="<?php echo count($storeList); ?>" name="totalOffers" id="totalOffers" />
+<?php
+if (count($storeList) > 0) {
+    echo $this->headLink()
+            ->prependStylesheet($this->basePath() . '/adminlte/plugins/iCheck/all.css')
+            ->prependStylesheet($this->basePath() . '/adminlte/dist/css/AdminLTE.min.css')
+            ->prependStylesheet($this->basePath() . '/adminlte/plugins/datatables/dataTables.bootstrap.css');
+
+    echo $this->headScript()
+            ->prependFile($this->basePath() . '/adminlte/plugins/iCheck/icheck.min.js')
+            ->prependFile($this->basePath() . '/adminlte/plugins/datatables/dataTables.bootstrap.js')
+            ->prependFile($this->basePath() . '/adminlte/plugins/datatables/jquery.dataTables.js')
+            ->prependFile($this->basePath() . '/js/module/store/offer/assign-offer-to-store.js');
+    ?>
+    <div style="width: 100%;">
+        <form name="assignOfferForm" id="assignOfferForm" method="POST" action="">
+            <input type="hidden" value="<?php echo $this->offerId; ?>" name="selectedOfferId" id="selectedOfferId" />
+            <table id="offerAssignment" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="no-sort">
+                            <label>
+                                <input type="checkbox" class="checkAll" />
+                            </label>
+                        </th>
+                        <th>
+                            <a
+                                alt="store_name" href="javascript:void(0)">
+                                <?php echo $this->translate('Store Name'); ?> </a>
+                        </th>
+                        <th>
+                            <a
+                                alt="address" href="javascript:void(0)">
+                                <?php echo $this->translate('Store Address'); ?> </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($storeList as $key => $store) {
+                        ?>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>
+                                        <input name="storeIds[]" type="checkbox" class="flat-red" value="<?php echo $store['storeId']; ?>" <?php echo (!empty($store['is_opted'])) ? 'checked="checked"' : ''; ?>/>
+                                    </label>
+                                </div>
+                            </td>
+                            <td><?php echo $store['storeName']; ?></td>
+                            <td><?php echo $store['storeAddress'] . ', ' . $store['city_name'] . ', ' . $store['state_name'] . ', ' . $store['country_name']; ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <input name="submitButton" id="submitButton" type="submit" style="display: none;"/>
+        </form>
+    </div>
+    <?php
+} else {
+    echo "No record found.";
+}

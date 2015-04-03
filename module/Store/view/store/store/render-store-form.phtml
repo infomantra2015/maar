@@ -1,0 +1,86 @@
+<div class="box-header">
+    <h3 class="panel-title"><?php echo $this->translate((empty($this->storeId) ? 'Add' : 'Edit') . ' Store') ?></h3>
+</div>
+<?php
+$form = $this->storeForm;
+
+$form->setAttribute('action', '')->prepare();
+echo $this->form()->openTag($form);
+$content = $form->get('StoreFieldset');
+?>
+<div class="box-body">   
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('categoryId')); ?></label>
+        <?php echo $this->formElement($content->get('categoryId')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('categoryId')); ?>
+        </label>
+    </div>  
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('countryId')); ?></label>
+        <?php echo $this->formElement($content->get('countryId')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('countryId')); ?>
+        </label>
+    </div>  
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('stateId')); ?></label>
+        <?php echo $this->formElement($content->get('stateId')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('stateId')); ?>
+        </label>
+    </div>     
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('cityId')); ?></label>
+        <?php echo $this->formElement($content->get('cityId')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('cityId')); ?>
+        </label>
+    </div>   
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('storeName')); ?></label>
+        <?php echo $this->formElement($content->get('storeName')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('storeName')); ?>
+        </label>
+    </div>  
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('storeDescription')); ?></label>
+        <?php echo $this->formElement($content->get('storeDescription')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('storeDescription')); ?>
+        </label>
+    </div> 
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('storeAddress')); ?></label>
+        <?php echo $this->formElement($content->get('storeAddress')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('storeAddress')); ?>
+        </label>
+    </div> 
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('status')); ?></label>
+        <?php echo $this->formElement($content->get('status')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('status')); ?>
+        </label>
+    </div> 
+</div>
+<div class="box-footer">
+    <?php
+    echo $this->formHidden($form->get('csrf'));
+    echo $this->formHidden($content->get('storeId'));
+    echo $this->formElement($form->get('submitBtn'));
+    echo '&nbsp;';
+    echo $this->formElement($form->get('cancelBtn'));
+    ?>  
+</div>
+<?php echo $this->form()->closeTag($form); ?>

@@ -1,0 +1,34 @@
+<?php
+
+$form = $this->forgotPasswordForm;
+
+$form->setAttribute('action', '/user/forgot-password/process-forgot-password')->prepare();
+echo $this->form()->openTag($form);
+$content = $form->get('ForgotPasswordFieldset');
+?>
+<div class="login-box-body">
+    <p class="login-box-msg">Forgot Password</p>
+        <div class="form-group has-feedback">
+            <?php echo $this->formElement($content->get('email')); ?>                            
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <span class="common-error-msg"><?php echo $this->formElementErrors($content->get('email')); ?></span>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-8">    
+               &nbsp;                      
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+                <?php
+                        echo $this->formHidden($form->get('csrf'));
+                        echo $this->formElement($form->get('forgotpassword'));                        
+                        ?>
+            </div><!-- /.col -->
+        </div>
+    <?php echo $this->form()->closeTag($form); ?>
+
+    <a href="<?php echo $this->url('user/default', array('controller' => 'login')) ?>">Login</a><br>
+    <a href="<?php echo $this->url('user/default', array('controller' => 'register')) ?>" class="text-center">Register a new membership</a>
+
+</div><!-- /.login-box-body -->
+

@@ -1,0 +1,61 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <?php echo $this->headTitle($this->translate($this->title))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php
+        echo $this->headMeta()
+                ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <?php
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon',
+                    'href' => $this->basePath() . '/img/favicon.ico'))
+                //->prependStylesheet($this->basePath() . '/css/style.css')
+                ->prependStylesheet($this->basePath() . '/js/datepicker/css/pikaday.css')
+                ->prependStylesheet($this->basePath() . '/adminlte/plugins/iCheck/square/blue.css')
+                ->prependStylesheet($this->basePath() . '/adminlte/dist/css/AdminLTE.min.css')
+                ->prependStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
+                ->prependStylesheet($this->basePath() . '/adminlte/bootstrap/css/bootstrap.min.css')
+        ?>
+        
+        <!-- Scripts -->
+        <?php
+        echo $this->headScript()
+                ->prependFile($this->basePath() . '/js/module/app.js')
+                ->prependFile($this->basePath() . '/js/detect-form-change.js')
+                ->prependFile($this->basePath() . '/js/datepicker/pikaday.js')
+                ->prependFile($this->basePath() . '/js/datepicker/moment.js')
+                ->prependFile($this->basePath() . '/js/jquery.form.min.js')
+                ->prependFile($this->basePath() . '/js/additional-methods.js')
+                ->prependFile($this->basePath() . '/js/jquery.validate.min.js')
+                ->prependFile($this->basePath() . '/adminlte/plugins/iCheck/icheck.min.js')
+                ->prependFile($this->basePath() . '/adminlte/bootstrap/js/bootstrap.min.js')
+                ->prependFile($this->basePath() . '/adminlte/plugins/jQuery/jQuery-2.1.3.min.js')
+                ->prependFile($this->basePath() . '/js/html5shiv.js',
+                        'text/javascript', array('conditional' => 'lt IE 9',))
+        ;
+        ?>
+        
+    </head>
+    <body class="login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="../../index2.html"><b>Info</b>Mantra</a>
+            </div><!-- /.login-logo -->
+            <?php echo $this->content; ?>
+        </div><!-- /.login-box -->
+        
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' // optional
+                });
+            });
+        </script>
+    </body>
+</html>

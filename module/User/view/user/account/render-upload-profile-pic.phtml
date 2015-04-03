@@ -1,0 +1,55 @@
+<?php
+echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/module/user/account/upload.js');
+?>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-primary">
+
+                <?php
+                $form = $this->uploadForm;
+
+                $form->setAttribute('action',
+                        '/user/account/process-user-file-upload')->setAttribute('enctype',
+                        'multipart/form-data')->prepare();
+                echo $this->form()->openTag($form);
+                $content = $form->get('FileUploadFieldset');
+                ?>
+                <div class="box-body">
+                    <img width="220px" src="<?php echo $this->profileImage; ?>" />
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('profileImage')); ?></label>
+                        <?php echo $this->formElement($content->get('profileImage')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('profileImage')); ?>
+                        </label>
+                    </div>                    
+                </div>
+                <div class="box-footer">
+                    <?php
+                    echo $this->formHidden($form->get('csrf'));
+                    echo $this->formHidden($content->get('userId'));
+                    echo $this->formElement($form->get('submit'));
+                    ?>  
+                </div>
+                <?php echo $this->form()->closeTag($form); ?>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Profile Picture History</h3>
+                </div>
+                <div class="box-body" id="profileImageList">
+                    
+                </div>
+                <div class="box-footer">
+                    Footer Section
+                </div>
+            </div>
+        </div>        
+    </div>
+</section>

@@ -1,0 +1,55 @@
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"><?php echo $this->translate('Change Password') ?></h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <?php
+                $form = $this->changePasswordForm;
+
+                $form->setAttribute('action',
+                        '/user/change-password/process-change-password')->prepare();
+                echo $this->form()->openTag($form);
+                $content = $form->get('ResetPasswordFieldset');
+                ?>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('currentPassword')); ?></label>
+                        <?php echo $this->formElement($content->get('currentPassword')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('currentPassword')); ?>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('password')); ?></label>
+                        <?php echo $this->formElement($content->get('password')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('password')); ?>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('confirmPassword')); ?></label>
+                        <?php echo $this->formElement($content->get('confirmPassword')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('confirmPassword')); ?>
+                        </label>
+                    </div>                    
+                </div><!-- /.box-body -->
+
+                <div class="box-footer">
+                    <?php
+                    echo $this->formHidden($form->get('csrf'));
+                    echo $this->formHidden($content->get('resetPasswordToken'));
+                    echo $this->formElement($form->get('changepassword'));
+                    ?>
+                </div>
+                <?php echo $this->form()->openTag($form); ?>
+            </div>
+        </div>    
+    </div>
+</section>

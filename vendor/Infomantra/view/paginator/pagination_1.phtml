@@ -1,0 +1,73 @@
+<input type="hidden" id="pageCount" name="pageCount"
+       value="<?php echo $this->pageCount; ?>" />
+<input type="hidden" id="totalItemCount" name="totalItemCount"
+       value="<?php echo $this->totalItemCount; ?>" />
+       <?php if ($this->pageCount): ?>
+    <div class="pagination">
+        <!-- First page link -->
+        <div class="dataTables_paginate paging_full_numbers"
+             id="datatable_example_paginate">
+                 <?php if (isset($this->previous)): ?>
+                <a class="first"
+                   href="<?php echo $this->url($this->route,
+                     array('page' => $this->first));
+                     ?>">
+                <?php echo $this->translate('First'); ?>
+                </a>
+    <?php else: ?>
+                <a class="first paginate_button paginate_button_disabled" tabindex="0"
+                   id="datatable_example_first"><?php echo $this->translate('First'); ?></a>
+    <?php endif; ?>
+
+            <!-- Previous page link -->
+    <?php if (isset($this->previous)): ?>
+                <a class="previous"
+                   href="<?php echo $this->url($this->route,
+                array('page' => $this->previous));
+        ?>">
+                <?php echo $this->translate('Previous'); ?>
+                </a>
+               <?php else: ?>
+                <a class="previous paginate_button paginate_button_disabled"
+                   tabindex="0" id="datatable_example_previous"><?php echo $this->translate('Previous'); ?></a>
+    <?php endif; ?>
+
+            <ul style="float: left;
+                font-weight: bold;
+                list-style: none outside none;
+                width: 150px;">
+                <li>(<span class="active">
+    <?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+                        of <?php echo $this->totalItemCount; ?>
+                    </span>)</li>
+            </ul>
+
+            <!-- Next page link -->
+                <?php if (isset($this->next)): ?>
+                <a
+                    href="<?php echo $this->url($this->route,
+                            array('page' => $this->next));
+                    ?>"
+                    class="next paginate_button" tabindex="0" id="datatable_example_next">
+                <?php echo $this->translate('Next'); ?>
+                </a>
+    <?php else: ?>
+                <a class="next paginate_button paginate_button_disabled"><?php echo $this->translate('Next'); ?></a>
+            <?php endif; ?>
+
+            <!-- Last page link -->
+                <?php if (isset($this->next)): ?>
+                <a
+                    href="<?php echo $this->url($this->route,
+                    array('page' => $this->last));
+            ?>"
+                    class="last paginate_button" tabindex="0" id="datatable_example_last">
+                <?php echo $this->translate('Last'); ?>
+                </a>
+    <?php else: ?>
+                <a class="last paginate_button paginate_button_disabled"><?php echo $this->translate('Last'); ?></a>
+    <?php endif; ?>
+
+        </div>
+    </div>
+<?php endif; ?>

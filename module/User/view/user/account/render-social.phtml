@@ -1,0 +1,74 @@
+<?php
+echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/module/user/account/social.js');
+?>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <?php
+                $form = $this->socialForm;
+
+                $form->setAttribute('action',
+                        '/user/account/process-user-social-update')->prepare();
+                echo $this->form()->openTag($form);
+                $content = $form->get('SocialFieldset');
+                ?>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('websiteUrl')); ?></label>
+                        <?php echo $this->formElement($content->get('websiteUrl')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('websiteUrl')); ?>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('facebookUrl')); ?></label>
+                        <?php echo $this->formElement($content->get('facebookUrl')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('facebookUrl')); ?>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('twitterUrl')); ?></label>
+                        <?php echo $this->formElement($content->get('twitterUrl')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('twitterUrl')); ?>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('linkedinUrl')); ?></label>
+                        <?php echo $this->formElement($content->get('linkedinUrl')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('linkedinUrl')); ?>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label><?php echo $this->formlabel($content->get('googlePlusUrl')); ?></label>
+                        <?php echo $this->formElement($content->get('googlePlusUrl')); ?>
+                        <label for="inputError" class="control-label">
+                            <i class="fa fa-times-circle-o"></i>
+                            <?php echo $this->formElementErrors($content->get('googlePlusUrl')); ?>
+                        </label>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <?php
+                    echo $this->formHidden($form->get('csrf'));
+                    echo $this->formHidden($content->get('userId'));
+                    echo $this->formElement($form->get('submit'));
+                    ?>  
+                </div>
+                <?php
+                echo $this->form()->openTag($form);
+                ?>
+            </div>
+        </div>
+    </div>
+</section>

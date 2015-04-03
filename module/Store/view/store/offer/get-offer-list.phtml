@@ -1,0 +1,108 @@
+<?php
+$offerList = $this->offerList;
+$order = $this->order;
+$page = $this->page;
+$columnName = $this->columnName;
+$recordsPerPage = $this->recordsPerPage;
+
+if (count($offerList) > 0) {
+    echo $this->headLink()
+            ->prependStylesheet($this->basePath() . '/adminlte/dist/css/AdminLTE.min.css')
+            ->prependStylesheet($this->basePath() . '/adminlte/plugins/datatables/dataTables.bootstrap.css');
+
+
+    echo $this->headScript()
+            ->prependFile($this->basePath() . '/adminlte/plugins/datatables/dataTables.bootstrap.js')
+            ->prependFile($this->basePath() . '/adminlte/plugins/datatables/jquery.dataTables.js');
+    ?>
+    <div style="width: 100%;">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="no-sort">
+                        <a
+                            alt="offer_id" href="javascript:void(0)">
+                            <?php echo $this->translate('S.No.'); ?> </a>
+                    </th>
+                    <th class="<?php echo ($columnName == 'title') ? "sorting_" . $order : "sorting"; ?>">
+                        <a
+                            alt="title" href="javascript:void(0)">
+                            <?php echo $this->translate('Title'); ?> </a>
+                    </th>
+                    <th class="<?php echo ($columnName == 'status') ? "sorting_" . $order : "sorting"; ?>">
+                        <a
+                            alt="status" href="javascript:void(0)">
+                            <?php echo $this->translate('Status'); ?> </a>
+                    </th>
+                    <th class="<?php echo ($columnName == 'created_on') ? "sorting_" . $order : "sorting"; ?>">
+                        <a
+                            alt="created_on" href="javascript:void(0)">
+                            <?php echo $this->translate('Created On'); ?> </a>
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $counter = 0;
+                if ($page == 1) {
+                    $counter = 1;
+                } else {
+                    $counter = $recordsPerPage * $page - $recordsPerPage + 1;
+                }
+
+                foreach ($offerList as $key => $offer) {
+                    ?>
+                    <tr>
+                        <td><?php echo ($key + $counter); ?></td>
+                        <td><?php echo $offer->title; ?></td>
+                        <td><?php echo ucfirst($offer->status); ?></td>
+                        <td><?php echo $offer->created_on; ?></td>
+                        <td>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-xs viewOffer" onclick="viewOffer(<?php echo $offer->offer_id; ?>)">
+                                <?php echo $this->translate('View'); ?> </a>  <a
+                                href="javascript:void(0)" class="btn btn-primary btn-xs editOffer" onclick="editOffer(<?php echo $offer->offer_id; ?>)">
+                                <?php echo $this->translate('Edit'); ?> </a> 
+                            <?php
+                            if ($offer->status == 'active') {
+                                ?>  <a
+                                    href="javascript:void(0)" class="btn btn-primary btn-xs assignOfferToStore" onclick="assignOfferToStore(<?php echo $offer->offer_id; ?>)">
+                                        <?php
+                                        echo $this->translate('Assing Offer To Store');
+                                    }
+                                    ?> </a>
+                        </td>
+                    </tr>
+    <?php } ?>
+            </tbody>
+        </table>
+        <div class="row">
+            <?php
+            echo $this->paginationControl($this->paginator, 'Sliding',
+                    'pagination', array('route' => 'store/default'));
+            ?>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery('#example1').dataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bSort": false,
+                "bInfo": false,
+                "bAutoWidth": true,
+                "aoColumnDefs": [{
+                        "bSortable": false,
+                        "aTargets": ["no-sort"]
+                    }]
+            });
+        });
+    </script>
+    <?php
+} else {
+    echo "No record found.";
+}

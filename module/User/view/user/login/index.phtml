@@ -1,0 +1,46 @@
+<?php
+$form = $this->loginForm;
+
+$form->setAttribute('action', '/user/login/process-login')->prepare();
+echo $this->form()->openTag($form);
+$content = $form->get('LoginFieldset');
+?>
+<div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+        <div class="form-group has-feedback">
+            <?php echo $this->formElement($content->get('email')); ?>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <span class="common-error-msg"><?php echo $this->formElementErrors($content->get('email')); ?></span>
+        </div>
+        <div class="form-group has-feedback">
+            <?php echo $this->formElement($content->get('password')); ?>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <span class="common-error-msg"><?php echo $this->formElementErrors($content->get('password')); ?></span>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">    
+                <div class="checkbox icheck">
+                    <label>
+                        <input type="checkbox"> Remember Me
+                    </label>
+                </div>                        
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+                <?php
+                        echo $this->formHidden($form->get('csrf'));
+                        echo $this->formElement($form->get('login'));                        
+                        ?>
+            </div><!-- /.col -->
+        </div>
+    <?php echo $this->form()->closeTag($form); ?>
+
+    <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using Facebook</a>
+        <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign in using Google+</a>
+    </div><!-- /.social-auth-links -->
+
+    <a href="<?php echo $this->url('user/default', array('controller' => 'forgot-password')) ?>">I forgot my password</a><br>
+    <a href="<?php echo $this->url('user/default', array('controller' => 'register')) ?>" class="text-center">Register a new membership</a>
+
+</div><!-- /.login-box-body -->

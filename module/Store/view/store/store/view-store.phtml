@@ -1,0 +1,34 @@
+<?php
+$storeDetails = $this->storeDetails;
+?>
+<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Store Name</th>
+                <td><?php echo $storeDetails['store_name']; ?></td>
+            </tr>
+            <tr>
+                <th>Store Description</th>
+                <td><?php echo $storeDetails['description']; ?></td>
+            </tr>
+            <tr>
+                <th>Store Address</th>
+                <td><?php echo $storeDetails['address']; ?></td>
+            </tr>
+            <tr>
+                <th>Created On</th>
+                <td><?php echo $storeDetails['created_on']; ?></td>
+            </tr>
+            <tr>
+                <th>Modified On</th>
+                <td><?php echo $storeDetails['modified_on']; ?></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td><?php echo $storeDetails['status']; ?></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

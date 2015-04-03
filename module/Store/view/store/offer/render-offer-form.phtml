@@ -1,0 +1,62 @@
+<div class="box-header">
+    <h3 class="panel-title"><?php echo $this->translate((empty($this->offerId) ? 'Add' : 'Edit') . ' Offer') ?></h3>
+</div>
+<?php
+$form = $this->offerForm;
+
+$form->setAttribute('action', '')->prepare();
+echo $this->form()->openTag($form);
+$content = $form->get('OfferFieldset');
+?>
+<div class="box-body">
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('offerTitle')); ?></label>
+        <?php echo $this->formElement($content->get('offerTitle')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('offerTitle')); ?>
+        </label>
+    </div>
+    <div class="form-group">
+        <label><?php echo $this->formlabel($content->get('offerDescription')); ?></label>
+        <?php echo $this->formElement($content->get('offerDescription')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('offerDescription')); ?>
+        </label>
+    </div>
+    <div class="form-group">
+        <label style="width: 100%;"><?php echo $this->formlabel($content->get('validFrom')); ?></label>
+        <?php echo $this->formElement($content->get('validFrom')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('validFrom')); ?>
+        </label>
+    </div>
+    <div class="form-group">
+        <label style="width: 100%;"><?php echo $this->formlabel($content->get('validTo')); ?></label>
+        <?php echo $this->formElement($content->get('validTo')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('validTo')); ?>
+        </label>
+    </div>
+    <div class="form-group">
+        <label style="width: 100%;"><?php echo $this->formlabel($content->get('status')); ?></label>
+        <?php echo $this->formElement($content->get('status')); ?>
+        <label for="inputError" class="control-label">
+            <i class="fa fa-times-circle-o"></i>
+            <?php echo $this->formElementErrors($content->get('status')); ?>
+        </label>
+    </div>
+</div>
+<div class="box-footer">
+    <?php
+    echo $this->formHidden($form->get('csrf'));
+    echo $this->formHidden($content->get('offerId'));
+    echo $this->formElement($form->get('submitBtn'));
+    echo '&nbsp;';
+    echo $this->formElement($form->get('cancelBtn'));
+    ?>
+</div>
+<?php echo $this->form()->closeTag($form); ?>

@@ -1,0 +1,43 @@
+<?php
+echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/module/store/store/store.js');
+?>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box box-primary" id="manageStoreBox">
+                <div class="box-header">
+                    <h3 class="panel-title"><?php echo $this->translate('Add Store') ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="panel-title"><?php echo $this->translate('Store List') ?></h3>
+                    <input type="hidden" name="pageNo" id="pageNo" value="1" />
+                    <input	type="hidden" name="columnName" id="columnName" value="store_name" />
+                    <input type="hidden" name="sortBy" id="sortBy" value="asc" />
+                </div><!-- /.box-header -->
+                <div class="box-body" id="storeListResponse">
+
+                </div><!-- /.box-body -->
+
+            </div>
+        </div>
+        <div class="col-md-8" id="storeDetailBox" style="display: none;">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="panel-title"><?php echo $this->translate('Store Details') ?></h3>
+                </div>
+                <div class="box-body" id="viewStoreResponse">
+
+                </div>
+                <div class="box-footer">
+                    <input type="button" name="close" value="Close" class="btn btn-warning btn-flat" onclick="closeStoreDetailsBox()"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
