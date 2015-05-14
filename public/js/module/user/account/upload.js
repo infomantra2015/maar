@@ -40,6 +40,7 @@ var upload = {
         upload.getProfilePics();
     },
     'getProfilePics': function () {
+        app.ajaxLoader('#profileImageList', 'show');
         app.ajaxRequest('/user/account/get-user-profile-pics', 'POST', {}, 'html', 'getProfilePicsResponse');
     }
 };

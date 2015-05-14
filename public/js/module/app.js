@@ -1,14 +1,15 @@
 var callbackList = {};
 
 var app = {
+    'LOADER': '<img style="display:block;margin:auto;width:350px;" src="/img/load.gif" />',
     'init': function () {
-
+        /*
         jQuery(document).ajaxStart(function () {
             jQuery('#ajaxLoader').show();
         }).ajaxStop(function () {
             jQuery('#ajaxLoader').hide();
         });
-
+        */
         callbackList['getStatesResponse'] = function (data, status) {
             jQuery('#stateId').empty();
             jQuery.each(data.states, function (index, val) {
@@ -22,8 +23,15 @@ var app = {
                 jQuery('#cityId').append(jQuery('<option>', {value: index, text: val}));
             });
         };
-        
+
         app.additionalValidators();
+    },
+    'ajaxLoader': function (selector, operation) {
+        if (operation == 'show') {
+            jQuery(selector).html(app.LOADER);
+        } else {
+            jQuery(selector).html('');
+        }
     },
     'additionalValidators': function () {
 
@@ -82,7 +90,7 @@ var app = {
             type: method,
             dataType: responseType,
             data: content,
-            async: false,
+            async: true,
             success: function (data, status) {
                 callbackList[callback](data, status);
             },

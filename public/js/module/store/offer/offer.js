@@ -103,7 +103,7 @@ var offer = {
         offer.getOfferList();
     },
     'getOfferList': function () {
-
+        app.ajaxLoader('#offerListResponse', 'show');
         var data = {};
         data['order'] = jQuery("#sortBy").val();
         data['field'] = jQuery("#columnName").val();
@@ -112,7 +112,7 @@ var offer = {
 
     },
     'renderOfferForm': function (offerId) {
-
+        app.ajaxLoader('#manageOfferBox', 'show');
         var data = {};
 
         if (jQuery.type(offerId) !== 'undefined') {
@@ -137,6 +137,7 @@ function getContent(obj, flag) {
 }
 
 function viewOffer(offerId) {
+    app.ajaxLoader('#viewOfferResponse', 'show');
     app.ajaxRequest('/store/offer/view-offer', 'POST', {'offerId': offerId}, 'HTML', 'viewOfferResponse');
     offer.renderOfferForm();
 }

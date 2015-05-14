@@ -84,36 +84,43 @@ var account = {
         jQuery('#manageProfile').trigger('click');
     },
     'renderProfileForm': function () {
+        app.ajaxLoader('#tab_1', 'show');
         setTimeout(function () {
             app.ajaxRequest('/user/account/render-profile', 'POST', {}, 'HTML', 'getRenderProfileResponse');
         }, 1000);
     },
     'renderAddressForm': function () {
-        setTimeout(function () {
+        app.ajaxLoader('#tab_2', 'show');
+        setTimeout(function () {            
             app.ajaxRequest('/user/account/render-address', 'POST', {}, 'HTML', 'getRenderAddressResponse');
         }, 1000);
     },
     'renderSocialForm': function () {
-        setTimeout(function () {
+        app.ajaxLoader('#tab_3', 'show');
+        setTimeout(function () {            
             app.ajaxRequest('/user/account/render-social', 'POST', {}, 'HTML', 'getRenderSocialResponse');
         }, 1000);
     },
     'renderUploadProfileForm': function () {
-        setTimeout(function () {
+        app.ajaxLoader('#tab_4', 'show');
+        setTimeout(function () {            
             app.ajaxRequest('/user/account/render-upload-profile-pic', 'POST', {}, 'HTML', 'getRenderUploadProfileResponse');
         }, 1000);
     },
     'renderStoreForm': function () {
-        setTimeout(function () {
+        app.ajaxLoader('#tab_5', 'show');
+        setTimeout(function () {            
             app.ajaxRequest('/store/store/manage-store', 'POST', {}, 'HTML', 'manageStoreResponse');
         }, 1000);
     },
     'renderOfferForm': function () {
-        setTimeout(function () {
+        app.ajaxLoader('#tab_6', 'show');
+        setTimeout(function () {            
             app.ajaxRequest('/store/offer/manage-offer', 'POST', {}, 'HTML', 'manageOfferResponse');
         }, 1000);
     },
     'renderSettingForm': function () {
+        app.ajaxLoader('#tab_7', 'show');
         app.ajaxRequest('/user/account/render-setting', 'POST', {}, 'HTML', 'getRenderSettingResponse');
     }
 };
