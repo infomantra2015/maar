@@ -22,7 +22,7 @@ var app = {
                 jQuery('#cityId').append(jQuery('<option>', {value: index, text: val}));
             });
         };
-
+        
         app.additionalValidators();
     },
     'additionalValidators': function () {

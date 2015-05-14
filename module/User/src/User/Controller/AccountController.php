@@ -51,7 +51,7 @@ class AccountController extends AppController {
         $profileForm = null;
 
         if (count($userDetails) > 0) {
-            
+
             $userDetails = $userDetails[0];
 
             $profileData = $this->getServiceLocator()->get('ProfileData');
@@ -397,7 +397,7 @@ class AccountController extends AppController {
 
         $uploadForm = null;
         $profileImage = AppConstant::DEFAULT_NO_IMAGE;
-        
+
         if (count($profileDetails) > 0) {
 
             $profileDetails = $profileDetails[0];
@@ -411,7 +411,7 @@ class AccountController extends AppController {
             $uploadData->setUserId($userId);
             $uploadForm->bind($uploadData);
         }
-        
+
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setVariable('uploadForm', $uploadForm);
@@ -419,22 +419,23 @@ class AccountController extends AppController {
 
         return $viewModel;
     }
-    
-    public function getUserProfilePicsAction(){
-        
+
+    public function getUserProfilePicsAction() {
+
         $userId = $this->_getLoggedUserDetails('user_id');
-        
-        $dirPath = AppConstant::DEFAULT_IMAGE_UPLOAD_PATH. $userId. '/profile/';
-        
-        $profilePicList = $this->_getFiles($dirPath);        
-        array_push($profilePicList, AppConstant::DEFAULT_NO_IMAGE);
-        
+
+        $dirPath = AppConstant::DEFAULT_IMAGE_UPLOAD_PATH . $userId . '/profile/';
+
+        $profilePicList = $this->_getFiles($dirPath);
+        //array_push($profilePicList, AppConstant::DEFAULT_NO_IMAGE);
+
         $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);        
+        $viewModel->setTerminal(true);
         $viewModel->setVariable('profilePicList', $profilePicList);
+        $viewModel->setVariable('userId', $userId);
         return $viewModel;
     }
-    
+
     /**
      * Update user file upload information
      *
@@ -521,6 +522,40 @@ class AccountController extends AppController {
         }
 
         return $validData;
+    }
+
+    public function downloadUserPicAction() {
+        
+        $picId = $this->params()->fromRoute('token');
+        $ext = $this->params()->fromRoute('ext');
+        $userId = $this->_getLoggedUserDetails('user_id');
+        
+        $filePath = 'public\\users\\' . $userId . '\\profile\\profile_' . $picId . '.' . $ext;
+        
+        $this->_downloadFile($filePath, $ext);
+        exit;
+    }
+
+    public function deleteUserPicAction() {
+
+        $response = array('status' => 'error', 'message' => Message::GENRAL_ERROR_MESSAGE);
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+            $data = $request->getPost();
+
+            $picId = $data->picId;
+            $ext = $data->ext;
+            $userId = $this->_getLoggedUserDetails('user_id');
+
+            $filePath = 'public\\users\\' . $userId . '\\profile\\profile_' . $picId . '.' . $ext;
+
+            if (file_exists($filePath) && unlink($filePath)) {
+                $response = array('status' => 'success', 'message' => Message::DELETE_PICTURE_SUCCESS);
+            }
+        }
+        return new JsonModel($response);
     }
 
 }

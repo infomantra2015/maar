@@ -18,6 +18,18 @@ var upload = {
             jQuery('#profileImageList').html(data);
         };
 
+
+        callbackList['downloadUserPicResponse'] = function (data, status) {
+            alert(data.message);
+            upload.getProfilePics();
+        };
+
+        callbackList['deleteUserPicResponse'] = function (data, status) {
+            alert(data.message);
+            upload.getProfilePics();
+        };
+
+
         jQuery('#submitBtn').click(function (event) {
             if (event.target === this) {
                 app.ajaxFormSubmit('#FileUploadForm', 'fileUploadResponse', 'validateFileUploadForm',
@@ -31,6 +43,18 @@ var upload = {
         app.ajaxRequest('/user/account/get-user-profile-pics', 'POST', {}, 'html', 'getProfilePicsResponse');
     }
 };
+
+function downloadPic(picId, ext) {
+    app.ajaxRequest('/user/account/download-user-pic', 'POST', {'picId': picId, 'ext': ext}, 'json', 'downloadUserPicResponse');
+}
+
+function deletePic(picId, ext) {
+
+    var c = confirm('Do you want to delete the picture?');
+    if (c) {
+        app.ajaxRequest('/user/account/delete-user-pic', 'POST', {'picId': picId, 'ext': ext}, 'json', 'deleteUserPicResponse');
+    }
+}
 
 jQuery(document).ready(function () {
     upload.init();

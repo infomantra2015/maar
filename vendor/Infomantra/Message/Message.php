@@ -76,6 +76,7 @@ class Message{
     
     const UPLOAD_PICTURE_SUCCESS = 'Your picture uploaded successfully.';
     const UPLAOD_PICTURE_FAILURE = 'Your picture not uploaded. Please try again.';
+    const DELETE_PICTURE_SUCCESS = 'Your picture deleted successfully.';
     
     const STORE_ADDED_SUCCESS = 'Your store added successfully.';    
     const STORE_UPDATED_SUCCESS = 'Your store updated successfully.';
