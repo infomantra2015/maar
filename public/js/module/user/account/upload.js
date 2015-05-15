@@ -12,6 +12,7 @@ var upload = {
 
         callbackList['fileUploadResponse'] = function (data, status) {
             alert(data.message);
+            upload.getProfilePics();
         };
 
         callbackList['getProfilePicsResponse'] = function (data, status) {
@@ -29,6 +30,15 @@ var upload = {
             upload.getProfilePics();
         };
 
+        callbackList['setProfilePicResponse'] = function (data, status) {
+            alert(data.message);
+            upload.getProfilePics();
+        };
+
+        callbackList['removeProfilePicResponse'] = function (data, status) {
+            alert(data.message);
+            upload.getProfilePics();
+        };
 
         jQuery('#submitBtn').click(function (event) {
             if (event.target === this) {
@@ -54,6 +64,17 @@ function deletePic(picId, ext) {
     var c = confirm('Do you want to delete the picture?');
     if (c) {
         app.ajaxRequest('/user/account/delete-user-pic', 'POST', {'picId': picId, 'ext': ext}, 'json', 'deleteUserPicResponse');
+    }
+}
+
+function setProfilePic(picId, ext) {
+    app.ajaxRequest('/user/account/set-profile-pic', 'POST', {'picId': picId, 'ext': ext}, 'json', 'setProfilePicResponse');
+}
+
+function removeProfilePic(picId, ext) {
+    var c = confirm('Do you want to remove profile picture?');
+    if (c) {
+        app.ajaxRequest('/user/account/remove-profile-pic', 'POST', {'picId': picId, 'ext': ext}, 'json', 'removeProfilePicResponse');
     }
 }
 

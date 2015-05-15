@@ -25,6 +25,14 @@ class FileUploadFieldset extends Fieldset
                 'label' => ''
             )
         ));
+        
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Hidden',
+            'name' => 'isProfilePicSet',
+            'options' => array(
+                'label' => ''
+            )
+        ));
 
         $this->add(array(
             'type' => 'Zend\Form\Element\File',

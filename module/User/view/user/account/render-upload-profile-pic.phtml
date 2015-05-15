@@ -7,7 +7,6 @@ echo $this->headScript()
     <div class="row">
         <div class="col-md-3">
             <div class="box box-primary">
-
                 <?php
                 $form = $this->uploadForm;
 
@@ -18,7 +17,7 @@ echo $this->headScript()
                 $content = $form->get('FileUploadFieldset');
                 ?>
                 <div class="box-body">
-                    <img width="220px" src="<?php echo $this->profileImage; ?>" />
+                    <img id="userProfilePic" width="220px" src="<?php echo $this->profileImage; ?>" />
                     <div class="form-group">
                         <label><?php echo $this->formlabel($content->get('profileImage')); ?></label>
                         <?php echo $this->formElement($content->get('profileImage')); ?>
@@ -31,6 +30,7 @@ echo $this->headScript()
                 <div class="box-footer">
                     <?php
                     echo $this->formHidden($form->get('csrf'));
+                    echo $this->formHidden($content->get('isProfilePicSet'));                    
                     echo $this->formHidden($content->get('userId'));
                     echo $this->formElement($form->get('submit'));
                     ?>  

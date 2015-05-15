@@ -401,14 +401,13 @@ class AccountController extends AppController {
         if (count($profileDetails) > 0) {
 
             $profileDetails = $profileDetails[0];
-
-            if (!empty($profileDetails['profileImage'])) {
-                $profileImage = $profileDetails['profileImage'];
-            }
-
-            $uploadForm = new FileUploadForm();
             $uploadData = $this->getServiceLocator()->get('UserUploadPicData');
             $uploadData->setUserId($userId);
+            if (!empty($profileDetails['profileImage'])) {
+                $profileImage = $profileDetails['profileImage'];
+                $uploadData->setIsProfilePicSet($profileImage);
+            }
+            $uploadForm = new FileUploadForm();
             $uploadForm->bind($uploadData);
         }
 
@@ -427,11 +426,21 @@ class AccountController extends AppController {
         $dirPath = AppConstant::DEFAULT_IMAGE_UPLOAD_PATH . $userId . '/profile/';
 
         $profilePicList = $this->_getFiles($dirPath);
-        //array_push($profilePicList, AppConstant::DEFAULT_NO_IMAGE);
+
+        $userDetailTable = $this->getServiceLocator()->get('UserDetailTable');
+        $profileImageDetails = $userDetailTable->getRecords(
+                array('user_id' => $userId), array('profile_image')
+        );
+
+        $profileImage = AppConstant::DEFAULT_NO_IMAGE;
+        if (count($profileImageDetails) > 0) {
+            $profileImage = basename($profileImageDetails[0]['profile_image']);
+        }
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setVariable('profilePicList', $profilePicList);
+        $viewModel->setVariable('profileImage', $profileImage);
         $viewModel->setVariable('userId', $userId);
         return $viewModel;
     }
@@ -461,7 +470,7 @@ class AccountController extends AppController {
 
                 $userId = $validData->getUserId();
                 $imageDetails = $validData->getProfileImage();
-
+                $isProfilePicSet = $validData->getIsProfilePicSet();
                 $imagePath = AppConstant::DEFAULT_IMAGE_DB_PATH . $userId . '/profile/';
                 $imageUploadPath = AppConstant::DEFAULT_IMAGE_UPLOAD_PATH . $userId . '/profile/';
 
@@ -476,10 +485,16 @@ class AccountController extends AppController {
                 if (@move_uploaded_file($imageDetails['tmp_name'],
                                 $imageUploadPath)) {
 
-                    $userDetailTable = $this->getServiceLocator()->get("UserDetailTable");
+                    $status = false;
 
-                    $status = $userDetailTable->updateData(array('profile_image' => $imagePath),
-                            array('user_id' => $validData->getUserId()));
+                    if (empty($isProfilePicSet)) {
+                        $userDetailTable = $this->getServiceLocator()->get("UserDetailTable");
+
+                        $status = $userDetailTable->updateData(array('profile_image' => $imagePath),
+                                array('user_id' => $validData->getUserId()));
+                    } else {
+                        $status = true;
+                    }
 
                     if ($status) {
                         $response['message'] = Message::UPLOAD_PICTURE_SUCCESS;
@@ -525,13 +540,13 @@ class AccountController extends AppController {
     }
 
     public function downloadUserPicAction() {
-        
+
         $picId = $this->params()->fromRoute('token');
         $ext = $this->params()->fromRoute('ext');
         $userId = $this->_getLoggedUserDetails('user_id');
-        
+
         $filePath = 'public\\users\\' . $userId . '\\profile\\profile_' . $picId . '.' . $ext;
-        
+
         $this->_downloadFile($filePath, $ext);
         exit;
     }
@@ -553,6 +568,63 @@ class AccountController extends AppController {
 
             if (file_exists($filePath) && unlink($filePath)) {
                 $response = array('status' => 'success', 'message' => Message::DELETE_PICTURE_SUCCESS);
+            }
+        }
+        return new JsonModel($response);
+    }
+
+    public function setProfilePicAction() {
+
+        $response = array('status' => 'error', 'message' => Message::GENRAL_ERROR_MESSAGE);
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+            $data = $request->getPost();
+
+            $picId = $data->picId;
+            $ext = $data->ext;
+            $userId = $this->_getLoggedUserDetails('user_id');
+
+            $filePath = '\\users\\' . $userId . '\\profile\\profile_' . $picId . '.' . $ext;
+
+            if (file_exists('public' . $filePath)) {
+                $userDetailTable = $this->getServiceLocator()->get('UserDetailTable');
+                $filePath = str_replace("\\", "/", $filePath);
+                $status = $userDetailTable->updateData(
+                        array('profile_image' => $filePath),
+                        array('user_id' => $userId));
+                if ($status) {
+                    $response = array('status' => 'success', 'message' => Message::DELETE_PICTURE_SUCCESS);
+                }
+            }
+        }
+        return new JsonModel($response);
+    }
+
+    public function removeProfilePicAction() {
+
+        $response = array('status' => 'error', 'message' => Message::GENRAL_ERROR_MESSAGE);
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+            $data = $request->getPost();
+
+            $picId = $data->picId;
+            $ext = $data->ext;
+            $userId = $this->_getLoggedUserDetails('user_id');
+
+            $filePath = 'public\\users\\' . $userId . '\\profile\\profile_' . $picId . '.' . $ext;
+
+            if (file_exists($filePath)) {
+                $userDetailTable = $this->getServiceLocator()->get('UserDetailTable');
+                $status = $userDetailTable->updateData(
+                        array('profile_image' => AppConstant::DEFAULT_NO_IMAGE),
+                        array('user_id' => $userId));
+                if ($status) {
+                    $response = array('status' => 'success', 'message' => Message::REMOVE_PROFILE_PICTURE_SUCCESS);
+                }
             }
         }
         return new JsonModel($response);

@@ -82,7 +82,7 @@ var store = {
         store.getStoreList();
     },
     'getStoreList': function () {
-
+        app.ajaxLoader('#storeListResponse', 'show');
         var data = {};
         data['order'] = jQuery("#sortBy").val();
         data['field'] = jQuery("#columnName").val();
@@ -90,7 +90,7 @@ var store = {
         app.ajaxRequest('/store/store/get-store-list', 'POST', data, 'HTML', 'getStoreListResponse');
     },
     'renderStoreForm': function (storeId) {
-
+        app.ajaxLoader('#manageStoreBox', 'show');
         var data = {};
 
         if (jQuery.type(storeId) !== 'undefined') {
@@ -115,6 +115,7 @@ function getContent(obj, flag) {
 }
 
 function viewStore(storeId) {
+    app.ajaxLoader('#viewStoreResponse', 'show');
     app.ajaxRequest('/store/store/view-store', 'POST', {'storeId': storeId}, 'HTML', 'viewStoreResponse');
     store.renderStoreForm();
 }

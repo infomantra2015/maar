@@ -96,27 +96,27 @@
 <div class="row media-manager">  
     <?php if (count($this->profilePicList) > 0) { ?>
         <?php
+        $profileImage = $this->profileImage;
         foreach ($this->profilePicList as $index => $picture) {
 
             $imagePath = substr($picture, 6);
-            $fileName = basename($imagePath);
+            $fileName  = basename($imagePath);
             $timestamp = substr($fileName, 8, 10);
             $ext       = $ext = pathinfo($picture, PATHINFO_EXTENSION);
-            
+            $isProfilePicSet = ($profileImage == $fileName)?1:0;
             ?>
             <div class="col-xs-6 col-sm-4 col-md-3 document">
-                <div class="thmb">
-                    <!--
-                    <div class="ckbox ckbox-default" style="display: block;">
-                        <input type="checkbox" value="1" id="check1">
-                        <label for="check1"></label>
-                    </div>
-                    //-->
+                <div class="thmb <?php echo ($isProfilePicSet)?'selected':''; ?>">
                     <div class="btn-group fm-group" style="display: block;">
                         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle fm-toggle" type="button">
                             <span class="caret"></span>
                         </button>
                         <ul role="menu" class="dropdown-menu fm-menu pull-right">
+                            <?php if($isProfilePicSet){ ?>
+                            <li><a href="#" onclick="removeProfilePic('<?php echo $timestamp; ?>', '<?php echo $ext; ?>')"><i class="fa fa-flag-o"></i> Remove Profile Pic</a></li>
+                            <?php } else { ?>
+                            <li><a href="#" onclick="setProfilePic('<?php echo $timestamp; ?>', '<?php echo $ext; ?>')"><i class="fa fa-flag-o"></i> Set Profile Pic</a></li>
+                            <?php } ?>
                             <li><a href="<?php echo $this->basePath(); ?>/user/account/download-user-pic/token/<?php echo $timestamp; ?>/ext/<?php echo $ext; ?>" ><i class="fa fa-download"></i> Download</a></li>
                             <li><a href="#" onclick="deletePic('<?php echo $timestamp; ?>', '<?php echo $ext; ?>')"><i class="fa fa-trash-o"></i> Delete</a></li>
                         </ul>

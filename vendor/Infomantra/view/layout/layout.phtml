@@ -15,6 +15,7 @@
         <?php
         echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon',
                     'href' => $this->basePath() . '/img/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/custom.css')
                 ->prependStylesheet($this->basePath() . '/js/modal/css/bootstrap-dialog.css')
                 ->prependStylesheet($this->basePath() . '/js/datepicker/css/pikaday.css')
                 ->prependStylesheet($this->basePath() . '/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')
