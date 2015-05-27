@@ -3,6 +3,7 @@
 namespace Infomantra\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Db\Sql\Expression;
 
 class AppController extends AbstractActionController {
 
@@ -114,8 +115,7 @@ class AppController extends AbstractActionController {
             $stateTable = $this->getServiceLocator()->get('StateTable');
 
             $records = $stateTable->getRecords(array('country_id' => $countryId,
-                'status' => 'active'), array('state_id', 'state_name'),
-                    array('state_name asc'));
+                'status' => 'active'), array('state_id', 'state_name'), array('state_name asc'));
 
             if (count($records) > 0) {
                 foreach ($records as $record) {
@@ -142,8 +142,7 @@ class AppController extends AbstractActionController {
         if ($stateId) {
             $cityTable = $this->getServiceLocator()->get('CityTable');
 
-            $records = $cityTable->getRecords(array('state_id' => $stateId, 'status' => 'active'),
-                    array('city_id', 'city_name'), array('city_name asc'));
+            $records = $cityTable->getRecords(array('state_id' => $stateId, 'status' => 'active'), array('city_id', 'city_name'), array('city_name asc'));
 
             if (count($records) > 0) {
                 foreach ($records as $record) {
@@ -169,9 +168,7 @@ class AppController extends AbstractActionController {
 
         $categoryTable = $this->getServiceLocator()->get('CategoryTable');
 
-        $records = $categoryTable->getRecords(array('status' => 'active'),
-                array('category_id', 'category_name'),
-                array('category_name asc'));
+        $records = $categoryTable->getRecords(array('status' => 'active'), array('category_id', 'category_name'), array('category_name asc'));
 
         if (count($records) > 0) {
             foreach ($records as $record) {
@@ -236,4 +233,29 @@ class AppController extends AbstractActionController {
         exit();
     }
 
+    protected function _getStoreCount($userId = null) {
+        $totalStoreCount = 0;
+        if (!empty($userId)) {
+            $storeTable = $this->getServiceLocator()->get('StoreTable');
+            $records = $storeTable->getRecords(
+                    array('user_id' => $userId),    
+                    array('totalStoreCount' => new Expression('count(store_id)'))
+            );
+            $totalStoreCount = $records[0]['totalStoreCount'];            
+        }
+        return $totalStoreCount;
+    }
+    
+    protected function _getOfferCount($userId = null) {
+        $totalOfferCount = 0;
+        if (!empty($userId)) {
+            $offerTable = $this->getServiceLocator()->get('OfferTable');
+            $records = $offerTable->getRecords(
+                    array('user_id' => $userId),    
+                    array('totalOfferCount' => new Expression('count(offer_id)'))
+            );
+            $totalOfferCount = $records[0]['totalOfferCount'];
+        }
+        return $totalOfferCount;
+    }
 }

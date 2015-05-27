@@ -18,8 +18,8 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                    <h3><?php echo $this->dashboardData['totalStoreCount']; ?></h3>
+                    <p>Stores</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -31,8 +31,8 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                    <p>Bounce Rate</p>
+                    <h3><?php echo $this->dashboardData['totalOfferCount']; ?></h3>
+                    <p>Store Offers</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
