@@ -12,7 +12,7 @@ var register = {
         };
 
         callbackList['registerResponse'] = function (data, status) {
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
             location.href = '/user/login';
         };
 

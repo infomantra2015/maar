@@ -13,7 +13,7 @@
         <?php
         echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon',
                     'href' => $this->basePath() . '/img/favicon.ico'))
-                //->prependStylesheet($this->basePath() . '/css/style.css')
+                ->prependStylesheet($this->basePath() . '/js/modal/css/bootstrap-dialog.css')
                 ->prependStylesheet($this->basePath() . '/js/datepicker/css/pikaday.css')
                 ->prependStylesheet($this->basePath() . '/adminlte/plugins/iCheck/square/blue.css')
                 ->prependStylesheet($this->basePath() . '/adminlte/dist/css/AdminLTE.min.css')
@@ -25,6 +25,7 @@
         <?php
         echo $this->headScript()
                 ->prependFile($this->basePath() . '/js/module/app.js')
+                ->prependFile($this->basePath() . '/js/modal/js/bootstrap-dialog.min.js')
                 ->prependFile($this->basePath() . '/js/detect-form-change.js')
                 ->prependFile($this->basePath() . '/js/datepicker/pikaday.js')
                 ->prependFile($this->basePath() . '/js/datepicker/moment.js')

@@ -14,7 +14,7 @@ var address = {
 
         callbackList['addressResponse'] = function (data, status) {
             detectFormChange.resetFormData('#AddressForm');
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
         };
 
         jQuery('#addressBtn').click(function (event) {

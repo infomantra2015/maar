@@ -14,7 +14,7 @@ var profile = {
 
         callbackList['profileResponse'] = function (data, status) {
             detectFormChange.resetFormData('#ProfileForm');
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
         };
 
         jQuery('#profileBtn').click(function (event) {

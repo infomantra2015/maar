@@ -10,7 +10,7 @@ var changePassword = {
         };
 
         callbackList['changePasswordResponse'] = function (data, status) {
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
         };
 
         jQuery('#changePasswordBtn').click(function (event) {

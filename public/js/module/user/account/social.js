@@ -14,7 +14,7 @@ var address = {
 
         callbackList['socialResponse'] = function (data, status) {
             detectFormChange.resetFormData('#SocialForm');
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
         };
 
         jQuery('#submitBtn').click(function (event) {

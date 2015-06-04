@@ -1,7 +1,7 @@
 var forgotPassword = {
-    'init': function(){
+    'init': function () {
         jQuery('#ForgotPasswordForm').validate();
-        
+
         callbackList['validateForgotPasswordForm'] = function () {
             if (jQuery('#ForgotPasswordForm').valid()) {
                 return true;
@@ -10,10 +10,11 @@ var forgotPassword = {
         };
 
         callbackList['forgotPasswordResponse'] = function (data, status) {
-            alert(data.message);
-            if(data.status == 'success'){
-                location.href = '/user';
-            }     
+            BootstrapDialog.alert(data.message, function () {
+                if (data.status == 'success') {
+                    location.href = '/user';
+                }
+            });
         };
 
         jQuery('#forgotPasswordBtn').click(function (event) {
@@ -25,6 +26,6 @@ var forgotPassword = {
     }
 };
 
-jQuery(document).ready(function(){
+jQuery(document).ready(function () {
     forgotPassword.init();
 });

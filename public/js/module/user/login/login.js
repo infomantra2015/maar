@@ -12,10 +12,11 @@ var login = {
         };
 
         callbackList['loginResponse'] = function (data, status) {
-            alert(data.message);
-            if(data.status == 'success'){
-                location.href = '/user/dashboard';
-            }
+            BootstrapDialog.alert(data.message, function(){
+                if(data.status == 'success'){
+                    location.href = '/user/dashboard';
+                }
+            });            
         };
 
         jQuery('#loginBtn').click(function (event) {

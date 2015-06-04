@@ -1,7 +1,7 @@
 var resetPassword = {
-    'init': function(){
+    'init': function () {
         jQuery('#ResetPasswordForm').validate();
-        
+
         callbackList['validateResetPasswordForm'] = function () {
             if (jQuery('#ResetPasswordForm').valid()) {
                 return true;
@@ -10,10 +10,11 @@ var resetPassword = {
         };
 
         callbackList['resetPasswordResponse'] = function (data, status) {
-            alert(data.message);
-            if(data.status == 'success'){
-                location.href = '/user';
-            }            
+            BootstrapDialog.alert(data.message, function () {
+                if (data.status == 'success') {
+                    location.href = '/user';
+                }
+            });
         };
 
         jQuery('#resetPasswordBtn').click(function (event) {
@@ -25,6 +26,6 @@ var resetPassword = {
     }
 };
 
-jQuery(document).ready(function(){
+jQuery(document).ready(function () {
     resetPassword.init();
 });

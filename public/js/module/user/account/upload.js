@@ -11,7 +11,7 @@ var upload = {
         };
 
         callbackList['fileUploadResponse'] = function (data, status) {
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
             upload.getProfilePics();
         };
 
@@ -21,22 +21,22 @@ var upload = {
 
 
         callbackList['downloadUserPicResponse'] = function (data, status) {
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
             upload.getProfilePics();
         };
 
         callbackList['deleteUserPicResponse'] = function (data, status) {
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
             upload.getProfilePics();
         };
 
         callbackList['setProfilePicResponse'] = function (data, status) {
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
             upload.getProfilePics();
         };
 
         callbackList['removeProfilePicResponse'] = function (data, status) {
-            alert(data.message);
+            BootstrapDialog.alert(data.message);
             upload.getProfilePics();
         };
 
