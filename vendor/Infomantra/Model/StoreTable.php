@@ -36,7 +36,13 @@ class StoreTable extends AppModel {
                             ), 'city.city_id = stores.city_id',
                             array(
                         'city_name'
-                            ), 'left');
+                            ), 'left')
+                    ->join(array(
+                        'category' => 'categories'
+                            ), 'stores.category_id = category.category_id',
+                            array(
+                        'category_name'
+                            ), 'left');        
 
 
             if (count($params) > 0) {

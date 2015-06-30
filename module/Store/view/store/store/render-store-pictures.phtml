@@ -1,0 +1,37 @@
+<?php
+echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/module/store/store/upload.js');
+?>
+<div class="box-primary">
+    <?php
+    $form = $this->uploadForm;
+
+    $form->setAttribute('action', '/store/store/process-store-file-upload')->setAttribute('enctype', 'multipart/form-data')->prepare();
+    echo $this->form()->openTag($form);
+    $content = $form->get('FileUploadFieldset');
+    ?>
+    <div class="box-body">
+        <!--<img id="storeProfilePic" width="220px" src="<?php echo $this->storeImage; ?>" />//-->
+        <div class="form-group">
+            <label><?php echo $this->formlabel($content->get('storeImage')); ?></label>
+            <?php echo $this->formElement($content->get('storeImage')); ?>
+            <label for="inputError" class="control-label">
+                <i class="fa  "></i>
+                <?php echo $this->formElementErrors($content->get('storeImage')); ?>
+            </label>
+        </div>                    
+    </div>
+    <div class="box-footer">
+        <?php
+        echo $this->formHidden($form->get('csrf'));
+        echo $this->formHidden($content->get('isStoreLogo'));
+        echo $this->formHidden($content->get('storeId'));
+        echo $this->formHidden($content->get('userId'));
+        echo $this->formElement($form->get('submit'));
+        ?>  
+    </div>
+    <?php echo $this->form()->closeTag($form); ?>
+</div>
+<div id="storePictureList" class="box-primary">
+        
+</div>

@@ -11,3 +11,12 @@ and open the template in the editor.
 .thmb.selected {
     background-color: lightgrey;
 }
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.error {
+    color: red;
+    font-weight: normal;
+}

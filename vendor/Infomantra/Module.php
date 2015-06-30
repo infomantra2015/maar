@@ -181,6 +181,7 @@ class Module {
         return array(
             'invokables' => array(
                 'DateTime' => 'Infomantra\Form\View\Helper\DateTime',
+                'EncryptDecrypt' => 'Infomantra\Form\View\Helper\EncryptDecrypt',
             )
         );
     }

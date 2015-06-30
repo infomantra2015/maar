@@ -28,6 +28,7 @@ class AppConstant {
     const DEFAULT_IMAGE_DB_PATH = '/users/'; 
     const DEFAULT_IMAGE_UPLOAD_PATH = 'public/users/';
     const DEFAULT_PROFILE_IMG_PREFIX = 'profile_';
+    const DEFAULT_STORE_IMG_PREFIX = 'store_';
     const MOBILE_REG_EXP = '/^((\+){0,1}91(\s){0,1}(\-){0,1}(\s){0,1}){0,1}9[0-9](\s){0,1}(\-){0,1}(\s){0,1}[1-9]{1}[0-9]{7}$/';
     
     public static function getFileExtensions() {

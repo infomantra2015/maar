@@ -13,6 +13,7 @@ class StoreElements {
     private $createdOn;
     private $storeDescription;
     private $storeAddress;
+    private $storePic;
     private $status;
 
     public function getStoreAddress() {
@@ -86,7 +87,15 @@ class StoreElements {
     public function setStoreName($storeName) {
         $this->storeName = $storeName;
     }
-    
+
+    function getStorePic() {
+        return $this->storePic;
+    }
+
+    function setStorePic($storePic) {
+        $this->storePic = $storePic;
+    }
+
     public function getCategoryId() {
         return $this->categoryId;
     }

@@ -172,7 +172,7 @@ class StoreFieldset extends Fieldset implements InputFilterProviderInterface {
             'type' => 'Zend\Form\Element\Select',
             'name' => 'categoryId',
             'options' => array(
-                'label' => 'Categiry',
+                'label' => 'Category',
                 'label_attributes' => array(
                     'class' => 'form-label required',
                     'style' => 'width:100%'

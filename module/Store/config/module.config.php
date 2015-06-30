@@ -41,7 +41,8 @@ return array(
     'service_manager' => array(
         'invokables' => array(
             'StoreData' => 'Store\Form\Fieldset\Element\StoreElements',
-            'OfferData' => 'Store\Form\Fieldset\Element\OfferElements'
+            'OfferData' => 'Store\Form\Fieldset\Element\OfferElements',
+            'StoreUploadPicData' => 'Store\Form\Fieldset\Element\UploadPicureElements'
         ),
     ),
     'controllers' => array(

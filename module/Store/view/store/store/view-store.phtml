@@ -5,6 +5,10 @@ $storeDetails = $this->storeDetails;
     <table class="table">
         <tbody>
             <tr>
+                <th>Category Name</th>
+                <td><?php echo $storeDetails['category_name']; ?></td>
+            </tr>
+            <tr>
                 <th>Store Name</th>
                 <td><?php echo $storeDetails['store_name']; ?></td>
             </tr>
@@ -13,20 +17,32 @@ $storeDetails = $this->storeDetails;
                 <td><?php echo $storeDetails['description']; ?></td>
             </tr>
             <tr>
+                <th>Country</th>
+                <td><?php echo $storeDetails['country_name']; ?></td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td><?php echo $storeDetails['state_name']; ?></td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td><?php echo $storeDetails['city_name']; ?></td>
+            </tr>
+            <tr>
                 <th>Store Address</th>
                 <td><?php echo $storeDetails['address']; ?></td>
             </tr>
             <tr>
                 <th>Created On</th>
-                <td><?php echo $storeDetails['created_on']; ?></td>
+                <td><?php echo $this->dateTime($storeDetails['created_on']); ?></td>
             </tr>
             <tr>
                 <th>Modified On</th>
-                <td><?php echo $storeDetails['modified_on']; ?></td>
+                <td><?php echo $this->dateTime($storeDetails['modified_on']); ?></td>
             </tr>
             <tr>
                 <th>Status</th>
-                <td><?php echo $storeDetails['status']; ?></td>
+                <td><?php echo ucfirst($storeDetails['status']); ?></td>
             </tr>
         </tbody>
     </table>

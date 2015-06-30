@@ -74,10 +74,21 @@ var store = {
         };
 
         callbackList['viewStoreResponse'] = function (data, status) {
-            jQuery('#viewStoreResponse').html(data);
-            jQuery('#storeDetailBox').show();
+            jQuery('#store-information').html(data);
         };
-
+        
+        callbackList['renderStorePicturesResponse'] = function (data, status) {
+            jQuery('#store-pictures').html(data);
+        };
+        
+        callbackList['renderStoreTimingsResponse'] = function (data, status) {
+            jQuery('#store-timings').html(data);
+        };
+        
+        callbackList['getStorePictureListResponse'] = function (data, status) {
+            jQuery('#storePictureList').html(data);
+        };
+        
         store.renderStoreForm();
         store.getStoreList();
     },
@@ -97,6 +108,15 @@ var store = {
             data['storeId'] = storeId;
         }
         app.ajaxRequest('/store/store/render-store-form', 'POST', data, 'HTML', 'renderStoreResponse');
+    },
+    'getStorePictueList': function(storeId) {
+        app.ajaxLoader('#storePictureList', 'show');
+        var data = {};
+
+        if (jQuery.type(storeId) !== 'undefined') {
+            data['storeId'] = storeId;
+        }
+        app.ajaxRequest('/store/store/get-store-picture-list', 'POST', data, 'HTML', 'getStorePictureListResponse');
     }
 };
 
@@ -115,8 +135,10 @@ function getContent(obj, flag) {
 }
 
 function viewStore(storeId) {
-    app.ajaxLoader('#viewStoreResponse', 'show');
-    app.ajaxRequest('/store/store/view-store', 'POST', {'storeId': storeId}, 'HTML', 'viewStoreResponse');
+    $('#storeDetailBox').show();
+    app.ajaxRequest('/store/store/view-store', 'POST', {'storeId': storeId}, 'HTML', 'viewStoreResponse');    
+    app.ajaxRequest('/store/store/render-store-pictures', 'POST', {'storeId': storeId}, 'HTML', 'renderStorePicturesResponse');
+    app.ajaxRequest('/store/store/render-store-timings', 'POST', {'storeId': storeId}, 'HTML', 'renderStoreTimingsResponse');
     store.renderStoreForm();
 }
 
@@ -126,7 +148,6 @@ function editStore(storeId) {
 }
 
 function closeStoreDetailsBox() {
-    jQuery('#viewStoreResponse').html('');
     jQuery('#storeDetailBox').hide();
 }
 
